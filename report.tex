@@ -1,0 +1,464 @@
+\documentclass[10pt,twocolumn]{article}
+	
+\usepackage{myfontstyle}
+\usepackage{mypackages}
+\usepackage{mymacros}
+\usepackage{mycommands}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{amsmath,array,graphicx}
+\usepackage{pgfplots}
+\usepackage{filecontents}
+\usepackage{lipsum}
+
+
+\begin{document}
+\thispagestyle{fancy1}
+
+%%% Title and Abstract------------------------
+\twocolumn[
+\begin{center}
+	\hrule
+	\vspace{3pt}
+	% Title:
+	{\sffamily\bfseries\Large
+		Report for Laboratory 05 :  Contact Resistance
+	} \\
+	{\color{gray}
+		\vspace{3pt}
+		\hrule
+		\vspace{3pt}
+	}
+	{
+	
+		\hspace*{\fill}
+		Steven Araki
+		\hspace*{\fill}
+		
+		\hspace*{\fill}
+%		Fourth Author    % uncomment these two lines if there's a fourth author
+%		\hspace*{\fill}
+	}\\
+	\vspace{3pt}
+	{\itshape
+		\hspace*{\fill}
+		Department of Mechanical Engineering, Saint Martin's University
+		\hspace*{\fill} \\
+		\hspace*{\fill}
+		ME 430 Heat Transfer Laboratory
+		\hspace*{\fill}
+	}\\
+	\vspace{3pt}
+	{
+		\hspace*{\fill}
+		\today{} % today's date ... can type manually instead
+		\hspace*{\fill}
+	}
+	\vspace{3pt}
+	{\color{gray}\hrule}
+%	\vspace{2pt}
+\end{center}
+% Abstract:
+\begin{adjustwidth}{1.5in}{1.5in}
+{\small
+\noindent\textbf{Abstract.} \hspace{1em}
+This lab report discusses the investigation of contact resistance in a thermal joint by comparing the performance of joints with and without thermal paste. The experiment is conducted using the H112/H112A Heat Transfer Unit and National Instrument data loggers with LabView software. The purpose of this experiment is to familiarize students with the concept of contact resistance and to analyze the effects of thermal paste on heat conduction in thermal joints. The report presents temperature distribution data, compares clamped and unclamped joints, calculates thermal contact resistance, and addresses experimental uncertainties.
+
+}
+\end{adjustwidth}
+\vspace{9pt}
+\hrule
+\vspace{1\baselineskip}
+]
+
+%%% Body -------------------------
+
+
+\section{Introduction} 
+\label{sec:introduction}
+
+
+In this experiment, we're trying to understand how contact resistance works. We're comparing thermal joints with and without thermal paste. We use some equipment like the H112/H112A Heat Transfer Unit, National Instrument data loggers, and LabView software to measure temperature and see how these joints behave.
+
+To do this, we set up a thermal joint with specific measurements and heated it with a controlled voltage. We keep track of the temperature until it stays the same, meaning it's in a steady state. Then we look at the temperature patterns and compare joints that are clamped and unclamped to see how contact resistance affects heat flow. We do some math to figure out thermal contact resistance values and compare them in different trials.
+
+We also look at how the temperature changes over time during the experiment, which helps us understand how the joint behaves dynamically.
+
+All the information we gather in this experiment will help us see why having good thermal contact is important and how using thermal paste can make things better. We also take into account any uncertainties and other things that might have affected our results to make sure we understand everything thoroughly.
+\section{Materials and Procedures}
+\label{sec:MatandProcedures}
+
+\subsection{Materials}
+\label{Materials}
+
+
+\begin{itemize}
+    \item H112/H112A Heat Transfer Unit
+    \item Two National Instrument data loggers
+    \item LabView software
+    \item Heat conducting compound
+    \item Solvent for cleaning surfaces
+    \item Paper towels
+    \item Beaker
+    \item Stopwatch or other timing device
+\end{itemize}
+
+\subsection{Methods}
+\label{Methods}
+
+The experimental procedures were carried out as follows:
+
+\begin{enumerate}
+    \item Ensure that the main switch is in the off position, displaying no digital information.
+    \item Turn the voltage controller counterclockwise to set the AC voltage to its minimum setting. Connect the H112A unit to the service unit H112 via a power cord.
+    \item Connect a cooling tube to a nearby hose bibb, and turn on cold water, maintaining a flow rate of 1.5 liters per minute using a beaker and stopwatch.
+    \item Release clamps and tension screws on the H112A unit, ensuring that the faces of the heated and cooled sections are clean.
+    \item Apply thermal paste only between the cooled face and the intermediate brass section. Do not apply thermal paste between the heated and intermediate sections, and do not clamp the assembly together.
+    \item Turn on the main switch, and the digital displays will be illuminated.
+    \item Rotate the voltage controller to 120 volts.
+    \item Run LabView data loggers until the system reaches a steady state, signifying no further change in temperature with respect to time for all eight thermocouples.
+    \item Once the system reaches a steady state, stop the data loggers and check the exported Excel file for accurate data export.
+    \item Repeat steps 7 through 9 at 150 volts for unclamped and clamped configurations.
+    \item After completing the experiment, turn off the power by reducing the voltage to zero. Allow the system to cool before turning off the cooling water.
+    \item Turn off the faucet.
+    \item Turn off the main switch and unplug the electrical supply.
+    \item Wipe off the thermal paste on the conducting faces once the system has cooled.
+\end{enumerate}
+
+From Lab manual (\citeauthor{Wickett})
+
+
+\subsection{Calculations}
+\label{sec:calculations}
+
+To project the temperatures at the hot and cold faces using the heat conduction equation $\frac{dx}{dT}$, we need to have a temperature distribution along the length $x$ and understand how it changes with respect to temperature. Once we have the temperature profiles for the hot and cold faces, we can use the equation for thermal contact resistance to solve for $R_{t,c}''$.
+
+Here are the general steps:
+\begin{enumerate}
+
+\item We can you the power equation to find the heat transfer rate (in Watts) from the values on \autoref{Tab:1}:
+
+\begin{equation}
+P = V * I
+\label{eq:1}
+\end{equation}
+
+Where:
+\begin{itemize}
+  \item $P$ is Power (in Watts, W),
+  \item $V$ is the Voltage (in Volts, V),
+  \item $I$ is the Current (Amps, A) 
+\end{itemize}
+
+  \item We find the Power from \autoref{eq:2} and sub in the value to $q_x$ Then the heat flux equation can be expressed as:
+
+\begin{equation}
+\label{eq:2}
+q_x'' = \frac{q_x}{A}
+\end{equation}
+
+Where:
+\begin{itemize}
+ \item $q_x$ is the heat transfer rate from \autoref{eq:1}.
+ \item $q_x''$ is the heat flux ($\frac{W}{m^2}$).
+ \item $A$ is the cross-sectional area ($m^2$).
+\end{itemize}
+
+
+\item To project the temperatures at the hot and cold faces for each trial, you can use the calculated slopes. The equation for a linear relationship between temperature and distance is:
+
+\begin{equation}  
+\label{eq:3}
+slope = \frac{T_{y2}-T_{y1}}{d_{x2}-d_{x1}}
+\end{equation}
+
+Where 
+\begin{itemize}
+\item slope is from T1 to T3 found on \autoref{table:4}.
+ \item $T_{y2}$ is the temperature of either $T_{hot}$ and T4 or T6.
+ \item $T_{y1}$ is the temperature of either T3 and $T_{cold}$ or T6.
+ \item $d_{x2}$ is half the distance between the probes (which would be 0.0075 m).
+ \item $d_{x1}$ is the start distance from the probe (which would be 0).
+\end{itemize}
+
+  \item  Once you have the temperature profiles for the hot and cold faces, denote them as $T_{\text{hot}}$ and $T_{\text{cold}}$ which we can project from the slopes found later in this report.
+
+  \item  Use the equation for thermal contact resistance $R_{t,c}''$:
+
+\begin{equation}
+\label{eq:4}
+R_{t,c}'' = \frac{T_{\text{hot}} - T_{\text{cold}}}{q_x''}
+\end{equation}
+
+\begin{itemize}
+ \item$T_{\text{hot}}$ is the temperature at the hot face.
+ \item $T_{\text{cold}}$ is the temperature at the cold face.
+ \item $q_x$ is the heat flux from \autoref{eq:3}.
+\end{itemize}
+  \item  Solve for $R_{t,c}''$ using the known values of $T_{\text{hot}}$, $T_{\text{cold}}$, and $q_x''$.
+\end{enumerate}
+These steps outline the process to project the temperatures at the hot and cold faces along with calculating the thermal contact resistance $R_c''$ using the information you have about the temperature distribution and the heat flux. 
+
+
+
+
+\section{Results}
+\label{sec:results}
+
+
+These are the trial recordings for this lab recorded on 10/10:
+
+\begin{table}[H]
+\centering
+\caption{Heat Transfer Lab Trial Recording}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Trial & VOLTS (V) & AMPS (A) & Time Delay & Iteration Count  \\
+\hline
+1 & 120 & 0.134 & 60s & 102  \\
+\hline
+2 & 150 & 0.168 & 60s & 93  \\
+\hline
+3 (compressed system) & 150 & 0.169 & 60s & 65  \\
+\hline
+\end{tabular}%
+}
+
+\label{Tab:1}
+\end{table}
+
+
+
+With \autoref{eq:1} and using the values found on \autoref{Tab:1} we find that the heat transfer rate in Watts is:
+
+\begin{table}[H]
+\centering
+\caption{Power ($q_x$) in Watts for each trail}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Trial} & \textbf{Power (W)}\\
+\hline
+1 (120V) & 16.08 \\
+\hline
+2 (150 V) & 25.2 \\
+\hline
+3 (150 V compressed) & 25.35 \\
+\hline
+\end{tabular}
+\label{Table:2}
+
+\end{table}
+
+Then we can use the cross-sectional area which is in the vertical view of the cylinder as the diameter times the length between the Temperature probes 1-3, 6-8 are 0.00075 ($m^2$). then we can implement this into \autoref{eq:2} with the values from \autoref{Table:2} we get the following values for Heat flux:
+
+\begin{table}[H]
+\centering
+\caption{Heat flux for the different sections of rod}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Voltages \& (Thermometers)} & \textbf{Heat flux ($\frac{W}{m^2}$)} \\
+\hline
+T120V (1-3) & 21440 \\
+\hline
+T120V (6-8) & 21440 \\
+\hline
+T150V (1-3) & 33600 \\
+\hline
+T150V (6-8) & 33600 \\
+\hline
+T150V Compressed (1-3) & 33800 \\
+\hline
+T150V Compressed (6-8) & 33800 \\
+\hline
+\end{tabular}
+\label{table:3}
+
+\end{table}
+
+Now we can use the experimental data to graph the temperature vs. Axial distance shown below:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/TvsAgraph.eps} 
+  \caption{Temperatures from 120V,150V,150V (compressed) from T1 to T8}
+  \label{fig:T1}
+\end{figure}
+ 
+In \autoref{fig:T1} we can see that the temperature was converted to Kelvin and is plotted over the axial distance. As you can tell the trails ran with no compression and no thermal paste in the top section of the insert has a significant drop in temperature.
+
+This is the slopes of each trail using the MATLAB polyfit function:
+
+\begin{table}[H]
+\centering
+\caption{Slopes for Different Temperature Ranges}
+
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Voltages \& (Thermometers)} & \textbf{Slope} \\
+\hline
+T120V (1-3) & $-246.6174$ \\
+\hline
+T120V (6-8) & $-220.9094$ \\
+\hline
+T150V (1-3) & $-369.2761$ \\
+\hline
+T150V (6-8) & $-330.5340$ \\
+\hline
+T150V Compressed (1-3) & $-385.9974$ \\
+\hline
+T150V Compressed (6-8) & $-347.8129$ \\
+\hline
+\end{tabular}
+\label{table:4}
+\end{table}
+
+
+Since we have the slopes from \autoref{table:4}, we can then use, \autoref{eq:3} to find the hot and cold temperatures across the sections between the T3 and T4, fixed rod and the insert, below are the results:
+
+\begin{table}[H]
+\centering
+\caption{Temperatures between T3 and T4 }
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Voltages}  & \textbf{Temperatures (K)} \\
+\hline
+T120V ($T_{hot}$) & 322.393 \\
+\hline
+T120V ($T_{cold}$) & 308.473 \\
+\hline
+T150V ($T_{hot}$) & 340.473 \\
+\hline
+T150V ($T_{cold}$) & 317.971 \\
+\hline
+T150V Compressed ($T_{hot}$) & 324.501 \\
+\hline
+T150V Compressed ($T_{cold}$) & 319.809 \\
+\hline
+\end{tabular}
+\label{Tab:5}
+\end{table}
+
+Now we can do the Thermal paste side, between T5 and T6, and find the \autoref{table:4} and \autoref{eq:3}, these are the results below:
+
+\begin{table}[H]
+\centering
+\caption{Temperatures between T5 and T6 }
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Voltages}  & \textbf{Temperatures (K)} \\
+\hline
+T120V ($T_{hot}$) & 303.923 \\
+\hline
+T120V ($T_{cold}$) & 299.164 \\
+\hline
+T150V ($T_{hot}$) & 311.794 \\
+\hline
+T150V ($T_{cold}$) & 304.717 \\
+\hline
+T150V Compressed ($T_{hot}$) & 313.039 \\
+\hline
+T150V Compressed ($T_{cold}$) & 305.678 \\
+\hline
+\end{tabular}
+\label{Tab:6}
+
+\end{table}
+
+With finding the slopes from \autoref{table:4}, from only the T1 -T3, and using the values from \autoref{Tab:5}. Then heat flux from table 3 we can use \autoref{eq:3} to find the thermal contact resistance of each trail shown below:
+
+\begin{table}[H]
+\centering
+\caption{Thermal resistance between T3 and T4}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Trial} & \textbf{Thermal Resistance ($\frac{m^2*K}{W}$})\\
+\hline
+120V & 0.000649\\
+\hline
+150 V & 0.00067 \\
+\hline
+150 V compressed & 0.000139 \\
+\hline
+\end{tabular}
+\label{Tab:7}
+
+\end{table}
+
+Now we can do the same but with the thermal contact resistance between T5 and T6 and the slopes from T6 - T8:
+
+\begin{table}[H]
+\centering
+\caption{Thermal resistance between T5 and T6}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Trial} & \textbf{Thermal Resistance ($\frac{m^2*K}{W}$})\\
+\hline
+120V & 0.000649\\
+\hline
+150 V & 0.000211 \\
+\hline
+150 V compressed & 0.000218 \\
+\hline
+\end{tabular}
+\label{Tab:8}
+
+\end{table}
+
+This is each trail from 120V, 150V, and 150V compressed over time. Below are the figures that show how the compression has a huge impact versus the uncompressed trails:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/120Vvst.eps} 
+  \caption{Temperatures from 120V from T1 to T8 vs time}
+  \label{fig:T2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/150Vvst.eps} 
+  \caption{Temperatures from 150V from T1 to T8 vs time}
+  \label{fig:T3}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/150VCvst.eps} 
+  \caption{Temperatures from 150V (compressed) from T1 to T8 vs. time}
+  \label{fig:T4}
+\end{figure}
+
+
+\section{Discussion}
+
+In \autoref{fig:T1} we can see that the 120 and 150 Volt trials have a huge difference in temperature over the axial distance, this shows that the air in between the insert and the fixed rod is creating an insulation barrier. It also can explain that the thermal joint needs some type of thermal paste or joint compound that can help distribute the heat across the joint. Which in turn can stop the huge temperature differences shown in \autoref{Tab:5} and \autoref{Tab:6}. 
+
+During the calculation process of the temperature across the joint, I was unsure of the result due to the significant decrease in temperature. But with further investigations, I can clearly see that it is not wrong and that the insulation barrier from the air does create this impact on the joint.
+
+With this insight, we can also see that the thermal resistance calculated in \autoref{Tab:7} and \autoref{Tab:8} shows that the compressed has a lower thermal resistance than that of the uncompressed which can be seen in \autoref{fig:T1}, which is why there is no drop in the 150 V compressed temperature across the axial distance. 
+
+Also, from the transient temperature distribution graphs above, \autoref{fig:T2}-\autoref{fig:T4}, there was something unexpected. The first two figures 2 and 3, have a small bump in the line due to the thermal contact resistance which is assumed going to show on these plots. The one that is unexpected is Figure 4, which has a very unusual trend. I am assuming this is because of the compression that is involved and that the heat transfer is better with the addition of that force. 
+
+ Finally, with  \autoref{fig:T2} is assumed due to the figure showing a drop and never fully going into a steady state. This can be an experimental error due to the change in temperature of the water that was running to cool the rod or various changes in the flow of the water which can create these increases and decreases during the logging of this experiment. 
+
+ 
+
+\section{Conclusion}
+
+In conclusion, this lab report has detailed an experiment aimed at investigating contact resistance in a thermal joint by comparing joints with and without the application of thermal paste. Through the use of the H112/H112A Heat Transfer Unit, National Instrument data loggers, and LabView software, we collected temperature data and analyzed the behavior of these thermal joints.
+
+The results and analysis presented in this report provide valuable insights into the effects of contact resistance on heat conduction. We found that the presence of thermal paste significantly improves the efficiency of heat transfer, as demonstrated by the lower thermal resistance values. Additionally, the unexpected temperature trend observed in the compressed system highlights the complex nature of heat conduction in such joints, indicating the importance of maintaining consistent and adequate contact. However, it is important to acknowledge the uncertainties in the calculations and unexpected temperature behavior observed.
+
+In summary, this experiment serves as a valuable learning experience, giving us an understanding of contact resistance and its impact on heat transfer. It also provides a foundation for future research and improvements in thermal conduction techniques.
+
+\section{Author Contributions}
+
+Even though I missed this lab Quinfu made an excellent Excel sheet for this lab!
+
+%% References -------------------------
+
+\bibliographystyle{plainnat}
+\bibliography{report}
+
+
+\end{document}  
